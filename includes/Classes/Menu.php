@@ -27,7 +27,7 @@ class Menu
             'dashicons-admin-site',
             25
         );
-
+      
         $submenu['library-management.php']['my_profile'] = array(
             __('Plugin Dashboard', 'textdomain'),
             $menuPermission,

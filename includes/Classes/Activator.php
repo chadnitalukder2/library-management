@@ -41,25 +41,106 @@ class Activator
         * and write your own query at createBookmarkTable function
         */
 
-        // $this->createBookmarkTable();
+        $this->migrateBooksTable();
+        $this->migrateMembersTable();
+        $this->migrateBorrowRecordsTable();
+        $this->migrateCategoryTable();
+        $this->migrateStaffTable();
     }
 
-    public function createBookmarkTable()
+    public function migrateBooksTable()
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'library-management';
+        $table_name = $wpdb->prefix . 'lmt_books';
         $sql = "CREATE TABLE $table_name (
-                                             pl_id int(10) NOT NULL AUTO_INCREMENT,
-                                             pl_name varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-                                             chart_values varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-                                             created_at timestamp NULL DEFAULT NULL,
-                                             updated_at timestamp NULL DEFAULT NULL,
-                                             PRIMARY KEY (chart_id)
-                                            ) $charset_collate;";
-
+        id int(11) NOT NULL AUTO_INCREMENT,
+        title varchar(255) DEFAULT NULL,
+        author varchar(255)  DEFAULT NULL,
+        published_date varchar(255) NULL,
+        category_id int(11) NOT NULL,
+        availability varchar(255) NULL,
+        added_date varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
         $this->runSQL($sql, $table_name);
     }
+
+    public function migrateMembersTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'lmt_members';
+        $sql = "CREATE TABLE $table_name (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        name varchar(255) DEFAULT NULL,
+        email varchar(255)  DEFAULT NULL,
+        phone int(11) NOT NULL,
+        address varchar(255) NULL,
+        membership_date varchar(255) NULL,
+        membership_type varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+        $this->runSQL($sql, $table_name);
+    }
+
+    public function migrateBorrowRecordsTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'lmt_borrow_records';
+        $sql = "CREATE TABLE $table_name (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        book_id int(11) NOT NULL,
+        member_id int(11) NOT NULL,
+        borrow_date varchar(255) NULL,
+        return_date varchar(255) NULL,
+        status varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+        $this->runSQL($sql, $table_name);
+    }
+
+    public function migrateCategoryTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'lmt_category';
+        $sql = "CREATE TABLE $table_name (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        name varchar(255) NOT NULL,
+        description varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+        $this->runSQL($sql, $table_name);
+    }
+
+    public function migrateStaffTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'lmt_staff';
+        $sql = "CREATE TABLE $table_name (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        name varchar(255) DEFAULT NULL,
+        email varchar(255)  DEFAULT NULL,
+        role  varchar(255)  DEFAULT NULL,
+        joined_date varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+        $this->runSQL($sql, $table_name);
+    }
+
 
     private function runSQL($sql, $tableName)
     {
