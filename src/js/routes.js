@@ -1,12 +1,18 @@
-import Dashboard from './Components/Dashboard';
-import Settings from './Components/Settings';
-import Supports from './Components/Supports';
+import Dashboard from '../admin/Components/Dashboard.vue';
+import Settings from '../admin/Components/Settings';
+import Supports from '../admin/Components/Supports';
+import Books from '../admin/page/books/AllBooks.vue';
 
 export const routes = [
     {
         path: '/',
         name: 'dashboard',
         component: Dashboard
+    },
+    {
+        path: '/books',
+        name: 'books',
+        component: Books
     },
     {
         path: '/settings',

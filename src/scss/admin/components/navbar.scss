@@ -1,0 +1,33 @@
+.lmt-admin-page {
+    margin-left: -20px;
+    .lmt-main-menu {
+        background-color: $lmt_background_color;
+        border-right: 1px solid $lmt-primary-100;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .lmt-menu-logo {
+            h3 {
+                @include text($color: $lmt-secondary-400, $size: 22px, $weight: 800, $lineHeight: 28px);
+            }
+        }
+        .lmt-menu-item {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            @include text($color: $lmt-dark-500, $size: 15px, $weight: 500, $lineHeight: 22px);
+            &:hover {
+                color:$lmt-secondary-400;
+            }
+          
+             &:focus ,&.router-link-active {
+                background: $lmt-secondary-50;
+                color: $lmt-secondary-400;
+                outline: none;
+                box-shadow: none
+            }
+           
+        }
+    }
+}

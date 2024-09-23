@@ -46,5 +46,9 @@
 @import '~element-ui/lib/theme-chalk/icon.css';
 @import '~element-ui/lib/theme-chalk/card.css';
 
-@import './global_css.scss';
 
+@import './color.scss';
+@import './mixin.scss';
+@import './variable.scss';
+@import './global_css.scss';
+@import './components/navbar.scss';

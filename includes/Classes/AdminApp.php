@@ -14,6 +14,6 @@ class AdminApp
 {
     public function bootView()
     {
-        echo "<div id='library-management_app'></div>";
+        echo "<div id='library-management_app'> </div>";
     }
 }

@@ -42,7 +42,7 @@ if (!defined('LIBRARYMANAGEMENT_VERSION')) {
 
         public function textDomain()
         {
-            load_plugin_textdomain('library-management', false, basename(dirname(__FILE__)) . '/languages');
+            load_plugin_textdomain('lmt', false, basename(dirname(__FILE__)) . '/languages');
         }
     }
 
@@ -59,7 +59,7 @@ if (!defined('LIBRARYMANAGEMENT_VERSION')) {
         if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
             remove_all_actions('admin_notices');
         }
-        
+
     });
 } else {
     add_action('admin_init', function () {
