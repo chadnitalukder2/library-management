@@ -30,7 +30,7 @@ class Menu
         );
       
         $submenu['library-management.php']['my_profile'] = array(
-            __('Plugin Dashboard', 'textdomain'),
+            __(' Dashboard', 'textdomain'),
             $menuPermission,
             'admin.php?page=library-management.php#/',
         );
@@ -45,11 +45,7 @@ class Menu
             $menuPermission,
             'admin.php?page=library-management.php#/settings',
         );
-        $submenu['library-management.php']['supports'] = array(
-            __('Supports', 'textdomain'),
-            $menuPermission,
-            'admin.php?page=library-management.php#/supports',
-        );
+       
     }
 
     public function enqueueAssets()

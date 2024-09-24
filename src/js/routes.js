@@ -1,7 +1,6 @@
-import Dashboard from '../admin/Components/Dashboard.vue';
-import Settings from '../admin/Components/Settings';
-import Supports from '../admin/Components/Supports';
-import Books from '../admin/page/books/AllBooks.vue';
+import Dashboard from '../admin/page/dashboard_page/Dashboard.vue';
+import Settings from '../admin/page/setting_page/Settings';
+import Books from '../admin/page/book_page/AllBooks.vue';
 
 export const routes = [
     {
@@ -19,9 +18,5 @@ export const routes = [
         name: 'settings',
         component: Settings
     },
-    {
-        path: '/supports',
-        name: 'supports',
-        component: Supports
-    }
+ 
 ];

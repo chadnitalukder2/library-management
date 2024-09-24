@@ -1,3 +1,6 @@
+const assert = require('assert');
+assert(someCondition == true); 
+
 let mix = require('laravel-mix');
 mix.setPublicPath('assets');
 const path = require('path');
