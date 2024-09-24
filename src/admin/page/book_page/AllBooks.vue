@@ -1,11 +1,16 @@
 <template>
-    <div class="lmt_destinations_wrapper">
+    <div class="lmt_wrapper">
 
-        <AppTable  v-loading="loading">
+        <AppModal :title="'Add New Book'" :width="1000" :showFooter="false" ref="add_books_modal">
+            <template #body>
+            </template>
+        </AppModal>
+
+        <AppTable :tableData="bookings"  v-loading="loading">
 
             <template #header>
                 <h1 class="table-title">All Books</h1>
-                <el-button size="large" type="primary" icon="Plus" class="ltm_button">
+                <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="ltm_button">
                     Add New Book
                 </el-button>
 
@@ -60,33 +65,14 @@
 
         </AppTable>
 
-        <!-- <AppModal
-            :title="'Delete Booking'"
-            :width="400"
-            :showFooter="false"
-            ref="delete_booking_modal">
-            <template #body>
-                <div class="delete-modal-body">
-                    <h1>Are you sure ?</h1>
-                    <p>You want to delete this booking</p>
-                </div>
-            </template>
-            <template #footer>
-                <div class="lmt-modal-footer">
-                    <el-button  type="default" size="medium">Cancel</el-button>
-                    <el-button  type="primary" size="medium">Delete</el-button>
-                </div>
-            </template>
-        </AppModal> -->
-
-      
+    
 
     </div>
 </template>
 
 <script>
 import AppTable from "../../Components/AppTable.vue";
-import AppModal from "../../components/AppModal.vue";
+import AppModal from "../../Components/AppModal.vue";
 import Icon from "../../Components/Icons/AppIcon.vue";
 export default {
     components: {
@@ -101,19 +87,19 @@ export default {
             booking: {},
             total_booking: 0,
             loading: false,
+            add_books_modal: false,
             currentPage: 1,
             pageSize: 10,
-            active_id: null
         }
     },
 
     methods: {
-    
-
-
+        openBooksAddModal() {
+            this.$refs.add_books_modal.openModel();
+            console.log('hello');
+            
+        }
     },
     
-    
-  
 }
 </script>
