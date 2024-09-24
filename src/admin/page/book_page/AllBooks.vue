@@ -5,10 +5,10 @@
 
             <template #header>
                 <h1 class="table-title">All Books</h1>
-                <el-button size="large" type="primary" class="ltm_button">
-                    Add New
+                <el-button size="large" type="primary" icon="Plus" class="ltm_button">
+                    Add New Book
                 </el-button>
-                
+
           
 
 
