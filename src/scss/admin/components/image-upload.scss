@@ -1,0 +1,49 @@
+.lmt_photo_card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    .file_upload_icon_btn{
+        border: 2px dashed $lmt-neutral-500;
+        // background: $lmt-neutral-100;
+        background: $lmt-neutral-50;
+        height: 80px;
+        width: 80px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            aspect-ratio: 2 / 2;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .icon > svg {
+            width: 20px;
+            height: 20px;
+            fill: $lmt-neutral-400;
+            margin: 0 auto;
+            margin-top: 29px;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .lmt_photo_holder {
+        position: relative;
+        img {
+            cursor: default;
+        }
+        .lmt-delete-image {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            padding: 4px;
+            background: $lmt-primary-500;
+            border-radius: 50%;
+            color: $lmt_text_light;
+            cursor: pointer;
+        }
+    }
+
+}

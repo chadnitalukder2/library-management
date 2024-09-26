@@ -1,6 +1,9 @@
 .lmt-app-modal {
-    border-radius: 8px;
+    
     padding: 0;
+    .el-dialog{
+        border-radius: 8px;
+    }
     .el-dialog__header {
         border-bottom: $lmt-border;
         padding: 20px;
@@ -14,11 +17,10 @@
             border-radius: 8px;
             width: 34px;
             height: 34px;
-            margin: 17px 15px;
         }
     }
     .el-dialog__body {
-        padding: 14px;
+        padding: 20px;
     }
     .lmt-modal-footer {
         display: flex;

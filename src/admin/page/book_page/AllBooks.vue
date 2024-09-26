@@ -3,6 +3,7 @@
 
         <AppModal :title="'Add New Book'" :width="1000" :showFooter="false" ref="add_books_modal">
             <template #body>
+                <AddBooks />
             </template>
         </AppModal>
 
@@ -21,7 +22,7 @@
             </template>
 
              <template #filter>
-                <el-input  class="lmt-search-input" v-model="search" style="width: 240px" size="large"
+                <el-input  class="lmt-search-input lmt_input" v-model="search" style="width: 240px" size="large"
                     placeholder="Please Input" prefix-icon="Search" />
             </template>
            
@@ -74,11 +75,13 @@
 import AppTable from "../../Components/AppTable.vue";
 import AppModal from "../../Components/AppModal.vue";
 import Icon from "../../Components/Icons/AppIcon.vue";
+import AddBooks from "./AddBooks.vue";
 export default {
     components: {
         AppTable,
         AppModal,
-        Icon
+        Icon,
+        AddBooks
     },
     data() {
         return {

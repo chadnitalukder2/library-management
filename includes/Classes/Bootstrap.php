@@ -35,9 +35,9 @@ class Bootstrap {
         
         
         // Some time require to run the migration
-        // require_once(LIBRARYMANAGEMENT_DIR . 'includes/Classes/Activator.php');
-        // $activator = new \libraryManagement\Classes\Activator();
-        // $activator->migrateDatabases(false);
+        require_once(LIBRARYMANAGEMENT_DIR . 'includes/Classes/Activator.php');
+        $activator = new \libraryManagement\Classes\Activator();
+        $activator->migrateDatabases(false);
 
 
 

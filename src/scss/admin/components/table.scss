@@ -10,15 +10,9 @@
         .table-title {
             @include text($size: 20px, $weight: 600)
         }
-        .ltm_button{
-            background: $lmt-secondary-400;
-            border: 1px solid $lmt-secondary-400;
-            border-radius: 8px;
-            &:hover{
-                background: $lmt-secondary-300;
-                border: 1px solid $lmt-secondary-300;
-            }
-        }
+     .llmt_button{
+        border-radius: 8px;
+     }
     }
   
     .lmt-table-filter {
@@ -29,18 +23,7 @@
         .el-date-editor {
             max-width: 250px;
         }
-        input{
-            border: 1px solid $lmt-neutral-500;
-            border-radius: 8px;
-            &:hover{
-                box-shadow: 0 0 0 0.5px $lmt-neutral-400 inset;
-            }
-            &:focus{
-                outline: none;
-                box-shadow: none;
-                border: 1px solid $lmt-secondary-400;
-            }
-        }
+      
     }
     .table-footer {
         padding: 16px 20px;

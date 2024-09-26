@@ -9,7 +9,7 @@
         justify-content: space-between;
         .lmt-menu-logo {
             h3 {
-                @include text($color: $lmt-secondary-400, $size: 22px, $weight: 800, $lineHeight: 28px);
+                @include text($color: $lmt-primary-500, $size: 22px, $weight: 800, $lineHeight: 28px);
             }
         }
         .lmt-menu-item {
@@ -17,17 +17,15 @@
             padding: 10px 16px;
             border-radius: 8px;
             @include text($color: $lmt-dark-500, $size: 15px, $weight: 500, $lineHeight: 22px);
-            &:hover {
-                color:$lmt-secondary-400;
-            }
-          
-             &:focus ,&.router-link-active {
-                background: $lmt-secondary-50;
-                color: $lmt-secondary-400;
-                outline: none;
-                box-shadow: none
-            }
-           
+          &:hover{
+            color: $lmt-primary-500;
+          }
+          &:focus{
+            box-shadow: none;
+            border: 1px solid $lmt-primary-50;
+            background: $lmt-primary-50;
+            color:  $lmt-primary-500;
+          }
         }
     }
 }

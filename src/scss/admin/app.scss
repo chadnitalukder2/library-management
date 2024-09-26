@@ -1,4 +1,4 @@
-// Import Libraries
+//Import Libraries
 @import '~element-ui/lib/theme-chalk/base.css';
 @import '~element-ui/lib/theme-chalk/input-number.css';
 @import '~element-ui/lib/theme-chalk/table.css';
@@ -54,4 +54,9 @@
 @import './components/navbar.scss';
 @import './components/table.scss';
 @import './components/modal.scss';
+@import './components/input.scss';
+@import './components/buttons.scss';
+@import './components/select.scss';
+@import './components/options.scss';
 @import './components/date_picker.scss';
+@import './components/image-upload.scss'

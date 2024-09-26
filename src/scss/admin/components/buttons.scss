@@ -1,0 +1,17 @@
+.el-button--primary {
+    color: $lmt-text-light;
+    background: $lmt-primary-500;
+}
+
+.el-button--success {
+    color: $lmt-text-light;
+    background: $lmt-dark-500;
+    border-color: $lmt-dark-500;
+    &:hover {
+        background: $lmt-dark-600;
+        border-color: $lmt-dark-500;
+    }
+}
+.el-button {
+    border-radius: 8px;
+}
