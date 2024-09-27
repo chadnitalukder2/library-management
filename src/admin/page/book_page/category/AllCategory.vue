@@ -3,14 +3,14 @@
 
         <AppModal :title="'Add New Book'" :width="1000" :showFooter="false" ref="add_books_modal">
             <template #body>
-                <AddBooks />
+              
             </template>
         </AppModal>
 
         <AppTable :tableData="bookings"  v-loading="loading">
 
             <template #header>
-                <h1 class="table-title">All Books</h1>
+                <h1 class="table-title">All Categories</h1>
                 <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="ltm_button">
                     Add New Book
                 </el-button>
@@ -72,16 +72,14 @@
 </template>
 
 <script>
-import AppTable from "../../Components/AppTable.vue";
-import AppModal from "../../Components/AppModal.vue";
-import Icon from "../../Components/Icons/AppIcon.vue";
-import AddBooks from "./AddBooks.vue";
+import AppTable from "../../../Components/AppTable.vue";
+import AppModal from "../../../Components/AppModal.vue";
+import Icon from "../../../Components/Icons/AppIcon.vue";
 export default {
     components: {
         AppTable,
         AppModal,
         Icon,
-        AddBooks
     },
     data() {
         return {

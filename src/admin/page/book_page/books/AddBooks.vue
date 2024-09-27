@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import ImageUpload from '../../Components/AppImageUpload.vue';
+import ImageUpload from '../../../Components/AppImageUpload.vue';
 
 export default {
     components:{

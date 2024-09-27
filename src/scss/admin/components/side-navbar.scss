@@ -1,0 +1,39 @@
+.lmt-side-navbar-wrapper{
+    background-color: $lmt_background_color;
+    width: 200px;
+    height: 100vh;
+    .lmt-side-navbar {
+        margin-top: 20px;
+        li {
+            margin-bottom: 0px;
+            a {
+                text-decoration: inherit;
+                padding: 12px;
+                display: block;
+                width: 100%;
+                @include text($color: $lmt-dark-500, $size: 14px, $weight: 600, $lineHeight: 22px);
+            }
+            a:focus{
+                box-shadow: none;
+                outline: none;
+            }
+            &:has(a.router-link-exact-active) {
+                background: $lmt-primary-500;
+                a {
+                    color: $lmt-text-light;
+                }
+            }
+        }
+    }
+    &.lmt-settings-navbar {
+        margin: 20px;
+        border-radius: 8px;
+        .lmt-side-navbar {
+            margin-top: 0px;
+            padding: 20px;
+            li {
+                border-radius: 8px;
+            }
+        }
+    }
+}

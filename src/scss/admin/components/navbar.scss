@@ -22,10 +22,13 @@
           }
           &:focus{
             box-shadow: none;
-            border: 1px solid $lmt-primary-50;
-            background: $lmt-primary-50;
-            color:  $lmt-primary-500;
           }
+          &.router-link-exact-active {
+            background:  $lmt-primary-50;
+            color: $lmt-primary-500;
+          }
+        
+          
         }
     }
 }
