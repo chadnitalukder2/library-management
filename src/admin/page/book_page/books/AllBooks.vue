@@ -28,12 +28,13 @@
            
             <template #columns>
                 <el-table-column label="ID" width="60" />
-                <el-table-column label="Booking Date" width="auto" />
-                <el-table-column label="Status" width="auto" />
-                <el-table-column  label="Total" width="auto" />
-                <el-table-column  label="Trip id" width="auto" />
-                <el-table-column  label="Customer Name" width="auto" />
-                <el-table-column  label="Customer Email" width="auto" />
+                <el-table-column label="Images" width="auto" />
+                <el-table-column label="Book Name" width="auto" />
+                <el-table-column  label="Category Name" width="auto" />
+                <el-table-column  label="Author" width="auto" />
+                <el-table-column  label="Edition" width="auto" />
+                <el-table-column  label="Quantity" width="auto" />
+                <el-table-column  label="Added Date" width="auto" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">

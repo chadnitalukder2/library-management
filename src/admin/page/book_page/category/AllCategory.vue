@@ -1,9 +1,9 @@
 <template>
     <div class="lmt_wrapper">
 
-        <AppModal :title="'Add New Book'" :width="1000" :showFooter="false" ref="add_books_modal">
+        <AppModal :title="'Add New Category'" :width="1000" :showFooter="false" ref="add_books_modal">
             <template #body>
-              
+              <AddCategory/>
             </template>
         </AppModal>
 
@@ -12,7 +12,7 @@
             <template #header>
                 <h1 class="table-title">All Categories</h1>
                 <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="ltm_button">
-                    Add New Book
+                    Add New Category
                 </el-button>
 
           
@@ -28,12 +28,9 @@
            
             <template #columns>
                 <el-table-column label="ID" width="60" />
-                <el-table-column label="Booking Date" width="auto" />
-                <el-table-column label="Status" width="auto" />
-                <el-table-column  label="Total" width="auto" />
-                <el-table-column  label="Trip id" width="auto" />
-                <el-table-column  label="Customer Name" width="auto" />
-                <el-table-column  label="Customer Email" width="auto" />
+                <el-table-column label="Category Name" width="auto" />
+                <el-table-column label="Description" width="auto" />
+               
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">
@@ -75,11 +72,13 @@
 import AppTable from "../../../Components/AppTable.vue";
 import AppModal from "../../../Components/AppModal.vue";
 import Icon from "../../../Components/Icons/AppIcon.vue";
+import AddCategory from "./AddCategory.vue";
 export default {
     components: {
         AppTable,
         AppModal,
         Icon,
+        AddCategory
     },
     data() {
         return {

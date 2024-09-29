@@ -1,12 +1,17 @@
 <?php
 
-namespace libraryManagement\Classes;
+namespace libraryManagement\Classes\Routes;
+use libraryManagement\Classes\Controllers\CategoryController;
 
 class AdminAjaxHandler
 {
     public function registerEndpoints()
     {
         add_action('wp_ajax_library-management_admin_ajax', array($this, 'handleEndPoint'));
+   
+        add_action('wp_ajax_lmt_category', function () {
+            (new CategoryController())->registerAjaxRoutes();
+        });
     }
     public function handleEndPoint()
     {
