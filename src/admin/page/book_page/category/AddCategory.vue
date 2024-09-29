@@ -47,7 +47,7 @@ export default {
             .post(ajaxurl, {
                 action: "lmt_category",
                 route: "post_category",
-                lmt_admin_nonce: window.libraryManagement.lmt_admin_nonce,
+                lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
                 data: this.categories
             }).then((response) => {
                 console.log(response);

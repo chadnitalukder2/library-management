@@ -66,7 +66,10 @@ class Menu
         $libraryManagementAdminVars = apply_filters('library-management/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => LIBRARYMANAGEMENT_URL . 'assets/',
-            'ajaxurl' => admin_url('admin-ajax.php')
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'lmt_admin_nonce' => wp_create_nonce('lmt_admin_nonce'),
+            'lmt_public_nonce' => wp_create_nonce('lmt_public_nonce'),
+            'server_time' => current_time('timestamp'),
         ));
 
         wp_localize_script('library-management_boot', 'libraryManagementAdmin', $libraryManagementAdminVars);

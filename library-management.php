@@ -11,7 +11,6 @@ License: A "Slug" license name e.g. GPL2
 Text Domain: textdomain
 */
 
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -29,9 +28,10 @@ if (!defined('LIBRARYMANAGEMENT_VERSION')) {
         {
             if (is_admin()) {
                 $this->adminHooks();
+
             }
         }
-
+       
         public function adminHooks()
         {
                 include LIBRARYMANAGEMENT_DIR . 'includes/Classes/Bootstrap.php';

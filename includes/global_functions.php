@@ -25,6 +25,7 @@ function LMTDBModel($tableName = false)
 function lmtValidateNonce($key = 'lmt_admin_nonce')
 {
     $nonce = \libraryManagement\Classes\Services\ArrayHelper::get($_REQUEST, $key);
+ 
     $shouldVerify = apply_filters('lmt_nonce_verify', true);
 
     if ($shouldVerify && !wp_verify_nonce(wp_unslash($nonce), $key)) {
