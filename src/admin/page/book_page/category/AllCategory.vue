@@ -27,10 +27,9 @@
             </template>
            
             <template #columns>
-                <el-table-column label="ID" width="60" />
-                <el-table-column label="Category Name" width="auto" />
-                <el-table-column label="Description" width="auto" />
-               
+                <el-table-column prop="id" label="ID" width="60" />
+                <el-table-column prop="name" label="Category Name" width="auto" />
+                <el-table-column prop="description" label="Description" width="auto" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">
@@ -53,10 +52,10 @@
                     v-model:page-size="pageSize"
                     :page-sizes="[10, 20, 30, 40]"
                     large
-                    :disabled="total_booking <= pageSize"
+                    :disabled="total_category <= pageSize"
                     background
                     layout="total, sizes, prev, pager, next"
-                    :total="+total_booking"
+                    :total="+total_category"
                   
                 />
             </template>
@@ -83,9 +82,9 @@ export default {
     data() {
         return {
             search: '',
-            bookings: [],
-            booking: {},
-            total_booking: 0,
+            categories: [],
+            category: {},
+            total_category: 0,
             loading: false,
             add_books_modal: false,
             currentPage: 1,
@@ -94,11 +93,33 @@ export default {
     },
 
     methods: {
+        getCategories(){
+            this.loading = true;
+            let that = this;
+
+            jQuery
+            .post(ajaxurl, {
+                action: "lmt_category",
+                route: "get_categories",
+                per_page: this.pageSize,
+                page: this.currentPage,
+                search: this.search,
+                lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
+            }).then((response) => {
+                    that.categories = response?.data?.data?.categories;
+                    that.total_category = response?.data?.data?.total;
+                }).fail((error) => {
+                    console.log(error);
+                }).always(() => {
+                    that.loading = false;
+                })
+        },
         openBooksAddModal() {
             this.$refs.add_books_modal.openModel();
-            console.log('hello');
-            
         }
+    },
+    created() {
+        this.getCategories();
     },
     
 }

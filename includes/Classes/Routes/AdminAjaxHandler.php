@@ -12,6 +12,7 @@ class AdminAjaxHandler
         add_action('wp_ajax_lmt_category', function () {
             (new CategoryController())->registerAjaxRoutes();
         });
+       
     }
     public function handleEndPoint()
     {

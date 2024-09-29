@@ -10,6 +10,7 @@ class CategoryController{
         $route = sanitize_text_field($_REQUEST['route']);
         $routeMaps = array(
             'post_category' => 'postCategory',
+            'get_categories' => 'getCategories'
         );
         if (isset($routeMaps[$route])) {
             $this->{$routeMaps[$route]}();
@@ -34,6 +35,10 @@ class CategoryController{
         } else {
             wp_send_json_error('Failed to updated Category');
         }
+    }
+
+    public function getCategories(){
+        
     }
 }
 
