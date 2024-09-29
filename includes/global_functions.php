@@ -18,7 +18,7 @@ function LMT_getAvatar($email, $size)
 
 function LMTDBModel($tableName = false)
 {
-    // return new \libraryManagement\Classes\Models\Model($tableName);
+    return new \libraryManagement\Classes\Models\Model($tableName);
 }
 
 
