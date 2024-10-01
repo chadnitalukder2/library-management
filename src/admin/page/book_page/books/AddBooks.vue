@@ -35,8 +35,9 @@
 
         <div class="input-wrapper">
             <p class="form-label" for="name">Category Name *</p>
-            <el-select class="lmt_input" v-model="book_info.category_id" placeholder="Discount Type" size="large"style="width: 100%">
-                <el-option label="Percent" value="Percent" />
+          
+            <el-select class="lmt_input" v-model="book_info.category_name" placeholder="Discount Type" size="large"style="width: 100%">
+                <el-option v-for="category in categories" :key="category.value" :label="category.name" :value="category.id"  />
                 <el-option label="Fixed" value="Fixed" />
             </el-select>
             <p class="error-message">{{ slug_error }}</p>
@@ -87,19 +88,41 @@ export default {
                 author: "",
                 publisher: "",
                 published_date: "",
-                category_id: "",
+                category_name: "",
                 quantity: "",
                 edition: "",
                 added_date: "",
                 description: "",
                 images: {}
             },
+            categories : [],
             name_error: "",
             slug_error: ""
         }
     },
-  
-   
+    methods: {
+        getCategories(){
+            this.loading = true;
+            let that = this;
+
+            jQuery
+            .post(ajaxurl, {
+                action: "lmt_category",
+                route: "get_categories",
+                lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
+            }).then((response) => {
+                    that.categories = response?.data?.data?.categories;
+                }).fail((error) => {
+                    console.log(error);
+                }).always(() => {
+                    that.loading = false;
+                })
+        }
+       
+    },
+    created() {
+        this.getCategories();
+    },
   
   
 }

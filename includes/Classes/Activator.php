@@ -57,7 +57,7 @@ class Activator
         id int(11) NOT NULL AUTO_INCREMENT,
         book_name varchar(255) DEFAULT NULL,
         images varchar(255) DEFAULT NULL,
-        category_id int(11) NOT NULL,
+        category_name varchar(255) NOT NULL,
         author varchar(255)  DEFAULT NULL,
         publisher varchar(255)  DEFAULT NULL,
         published_date varchar(255) NULL,
@@ -119,7 +119,7 @@ class Activator
         $sql = "CREATE TABLE $table_name (
         id int(11) NOT NULL AUTO_INCREMENT,
         name varchar(255) NOT NULL,
-        description varchar(255) NULL,
+        description TEXT NULL,
         created_at timestamp NULL,
         updated_at timestamp NULL,
         PRIMARY KEY (id)
