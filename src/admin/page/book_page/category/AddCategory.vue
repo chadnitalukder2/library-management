@@ -36,6 +36,20 @@ export default {
             name_error: "",
         }
     },
+    props: {
+        categories_data: {
+            type: Object,
+        }
+    },
+    watch: {
+        // Its required to watch the categories_data to update the category object
+        categories_data: {
+            handler: function (val) {
+                this.categories = val;
+            },
+            deep: true
+        }
+    },
     methods:{
         saveCategory(){
             this.name_error = "";
@@ -66,9 +80,14 @@ export default {
             });
           
         }
-    }
+    },
   
-   
+    mounted() {
+        console.log(this.categories_data);
+        if (this.categories_data) {
+            this.categories = this.categories_data;
+        }
+    }
   
   
 }

@@ -1,44 +1,40 @@
 <template>
     <div class="lmt_wrapper">
 
-        <AppModal :title="'Add New Category'" :width="1000" :showFooter="false" ref="add_books_modal">
+        <AppModal :title="'Add New Category'" :width="1000" :showFooter="false" ref="add_category_modal">
             <template #body>
-              <AddCategory/>
+              <AddCategory @updateDataAfterNewAdd="updateDataAfterNewAdd"/>
             </template>
         </AppModal>
 
-        <AppTable :tableData="bookings"  v-loading="loading">
+        <AppTable :tableData="categories"  v-loading="loading">
 
             <template #header>
                 <h1 class="table-title">All Categories</h1>
-                <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="ltm_button">
+                <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="llmt_button">
                     Add New Category
                 </el-button>
 
-          
-
-
-
             </template>
 
-             <template #filter>
+            <template #filter>
                 <el-input  class="lmt-search-input lmt_input" v-model="search" style="width: 240px" size="large"
                     placeholder="Please Input" prefix-icon="Search" />
             </template>
            
             <template #columns>
-                <el-table-column prop="id" label="ID" width="60" />
+                <el-table-column prop="id" label="ID" width="80" />
                 <el-table-column prop="name" label="Category Name" width="auto" />
-                <el-table-column prop="description" label="Description" width="auto" />
+                <el-table-column prop="description" label="Description" width="420" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
-                        <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">
-                            <el-button  link type="primary" size="small">
-                                <Icon icon="lmt-eye" />
+                        <el-tooltip class="box-item" effect="dark" content="Click to view category" placement="top-start">
+                            <el-button @click="openUpdateCategoryModal(row)" class="lmt_box_icon"  link  size="small">
+                                <Icon icon="lmt-edit" />
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip class="box-item" effect="dark" content="Click to delete activities" placement="top-start">
-                            <el-button  link type="primary" size="small">
+                        <el-tooltip class="box-item" effect="dark" content="Click to delete category" placement="top-start">
+                            <el-button @click="openDeleteCategoryModal(row)" class="lmt_box_icon"  link  size="small">
                                 <Icon icon="lmt-delete" />
                             </el-button>
                         </el-tooltip>
@@ -62,6 +58,34 @@
 
         </AppTable>
 
+        <AppModal
+            :title="'Update Category'"
+            :width="800"
+            :showFooter="false"
+            ref="update_category_modal">
+            <template #body>
+                <AddCategory :categories_data="category" />
+            </template>
+        </AppModal>
+
+        <AppModal
+            :title="'Delete Category'"
+            :width="400"
+            :showFooter="false"
+            ref="delete_category_modal">
+            <template #body>
+                <div class="delete-modal-body">
+                    <h1>Are you sure ?</h1>
+                    <p>You want to delete this category</p>
+                </div>
+            </template>
+            <template #footer>
+                <div class="lmt-modal-footer">
+                    <el-button @click="$refs.delete_category_modal.handleClose()" type="default" size="medium">Cancel</el-button>
+                    <el-button @click="deleteCategory" type="primary" size="medium">Delete</el-button>
+                </div>
+            </template>
+        </AppModal>
     
 
     </div>
@@ -86,9 +110,10 @@ export default {
             category: {},
             total_category: 0,
             loading: false,
-            add_books_modal: false,
+            add_category_modal: false,
             currentPage: 1,
             pageSize: 10,
+            active_id: null
         }
     },
 
@@ -106,6 +131,7 @@ export default {
                 search: this.search,
                 lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
             }).then((response) => {
+                console.log(response, 'response');
                     that.categories = response?.data?.data?.categories;
                     that.total_category = response?.data?.data?.total;
                 }).fail((error) => {
@@ -114,9 +140,36 @@ export default {
                     that.loading = false;
                 })
         },
+        deleteCategory(){
+            let that = this;
+
+            jQuery.post(ajaxurl, {
+                action: "lmt_category",
+                route: "delete_categories",
+                id: that.active_id,
+                lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
+            }).then((response) => {
+                    that.getCategories();
+                    that.$refs.delete_category_modal.handleClose();
+                }).fail((error) => {
+                    console.log(error);
+                })
+        },
         openBooksAddModal() {
-            this.$refs.add_books_modal.openModel();
-        }
+            this.$refs.add_category_modal.openModel();
+        },
+        openUpdateCategoryModal(row) {
+            this.category = row;
+            this.$refs.update_category_modal.openModel();
+        },
+        updateDataAfterNewAdd(new_category) {
+            this.$refs.add_category_modal.handleClose();
+            this.categories.unshift(new_category);
+        },
+        openDeleteCategoryModal(row) {
+            this.active_id = row.id;
+            this.$refs.delete_category_modal.openModel();
+        },
     },
     created() {
         this.getCategories();

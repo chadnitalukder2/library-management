@@ -10,7 +10,8 @@ class CategoryController{
         $route = sanitize_text_field($_REQUEST['route']);
         $routeMaps = array(
             'post_category' => 'postCategory',
-            'get_categories' => 'getCategories'
+            'get_categories' => 'getCategories',
+            'delete_categories' => 'deleteCategories'
         );
         if (isset($routeMaps[$route])) {
             $this->{$routeMaps[$route]}();
@@ -38,7 +39,29 @@ class CategoryController{
     }
 
     public function getCategories(){
-        
+        $response = (new Category())->getCategory();
+
+        wp_send_json_success(
+            array(
+                'data' => $response,
+                'message' => 'Category fetched successfully'
+            )
+        );
+    }
+
+    public  function deleteCategories(){
+        $category_id = Arr::get($_REQUEST,'id');
+
+        if(!$category_id){
+            wp_send_json_error('Category id is required');
+        }
+        $response = Category::deleteCategories($category_id);
+       
+        if ($response) {
+            wp_send_json_success('Activities deleted successfully');
+        } else {
+            wp_send_json_error('Failed to delete activities');
+        }
     }
 }
 
