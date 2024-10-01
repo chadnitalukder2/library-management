@@ -2,6 +2,7 @@
 
 namespace libraryManagement\Classes\Routes;
 use libraryManagement\Classes\Controllers\CategoryController;
+use libraryManagement\Classes\Controllers\BooksController;
 
 class AdminAjaxHandler
 {
@@ -11,6 +12,9 @@ class AdminAjaxHandler
    
         add_action('wp_ajax_lmt_category', function () {
             (new CategoryController())->registerAjaxRoutes();
+        });
+        add_action('wp_ajax_lmt_books', function () {
+            (new BooksController())->registerAjaxRoutes();
         });
        
     }

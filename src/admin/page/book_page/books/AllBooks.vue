@@ -7,7 +7,7 @@
             </template>
         </AppModal>
 
-        <AppTable :tableData="bookings"  v-loading="loading">
+        <AppTable :tableData="books"  v-loading="loading">
 
             <template #header>
                 <h1 class="table-title">All Books</h1>
@@ -27,23 +27,28 @@
             </template>
            
             <template #columns>
-                <el-table-column label="ID" width="60" />
-                <el-table-column label="Images" width="auto" />
-                <el-table-column label="Book Name" width="auto" />
-                <el-table-column  label="Category Name" width="auto" />
-                <el-table-column  label="Author" width="auto" />
-                <el-table-column  label="Edition" width="auto" />
-                <el-table-column  label="Quantity" width="auto" />
-                <el-table-column  label="Added Date" width="auto" />
+                <el-table-column prop="id" label="ID" width="60" />
+                <el-table-column label="Image" width="auto">
+                    <template #default="{ row }">
+                        <img v-if="row.images?.url" :src="row.images?.url" alt="image" style="width: 60px; height: 60px; object-fit: cover;">
+                        <span v-else>No Image</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="book_name" label="Book Name" width="auto" />
+                <el-table-column prop="category_name"  label="Category" width="auto" />
+                <el-table-column prop="author" label="Author" width="auto" />
+                <el-table-column prop="edition" label="Edition" width="auto" />
+                <el-table-column prop="quantity" label="Quantity" width="auto" />
+                <el-table-column prop="formattedDate" label="Added Date" width="auto" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">
-                            <el-button  link type="primary" size="small">
-                                <Icon icon="lmt-eye" />
+                            <el-button  class="lmt_box_icon"  link  size="small">
+                                <Icon icon="lmt-edit" />
                             </el-button>
                         </el-tooltip>
                         <el-tooltip class="box-item" effect="dark" content="Click to delete activities" placement="top-start">
-                            <el-button  link type="primary" size="small">
+                            <el-button  class="lmt_box_icon" link  size="small">
                                 <Icon icon="lmt-delete" />
                             </el-button>
                         </el-tooltip>
@@ -57,10 +62,10 @@
                     v-model:page-size="pageSize"
                     :page-sizes="[10, 20, 30, 40]"
                     large
-                    :disabled="total_booking <= pageSize"
+                    :disabled="total_book <= pageSize"
                     background
                     layout="total, sizes, prev, pager, next"
-                    :total="+total_booking"
+                    :total="+total_book"
                   
                 />
             </template>
@@ -87,9 +92,9 @@ export default {
     data() {
         return {
             search: '',
-            bookings: [],
-            booking: {},
-            total_booking: 0,
+            books: [],
+            book: {},
+            total_book: 0,
             loading: false,
             add_books_modal: false,
             currentPage: 1,
@@ -98,11 +103,55 @@ export default {
     },
 
     methods: {
+
+        formatDate(dateString) {
+            const date = new Date(dateString);
+
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // JavaScript months are 0-based, so add 1
+            const year = date.getFullYear();
+
+            // Format the date as "day-month-year"
+            return `${day}-${month}-${year}`;
+        },
+
+        getBooks() {
+            this.loading = true;
+            let that = this;
+            jQuery
+                .post(ajaxurl, {
+                    action: "lmt_books",
+                    route: "get_books",
+                    per_page: this.pageSize,
+                    page: this.currentPage,
+                    search: that.search,
+                    lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
+                }).then((response) => {
+                    // that.books = response?.data?.data?.books;
+                    that.books = response?.data?.data?.books.map(books => {
+                        return {
+                            ...books,
+                            formattedDate: that.formatDate(books.added_date) // Format each coupon's end date
+                        };
+                    });
+                    that.total_book = response?.data?.data?.total;
+                }).fail((error) => {
+                    console.log(error);
+                }).always(() => {
+                    that.loading = false;
+                })
+        },
+
         openBooksAddModal() {
             this.$refs.add_books_modal.openModel();
-            console.log('hello');
-            
-        }
+        },
+        updateDataAfterNewAdd(new_books) {
+            this.$refs.add_books_modal.handleClose();
+            this.books.unshift(new_books);
+        },
+    },
+    created() {
+        this.getBooks();
     },
     
 }

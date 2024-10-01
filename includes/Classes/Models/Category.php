@@ -28,9 +28,6 @@ class Category extends Model {
         $total = $query->getCount();
         $response = $query->orderBy($orderby, $order)->limit($per_page)->offset($offset)->get();
 
-        foreach ($response as $key => $value) {
-            $response[$key]->images = maybe_unserialize($value->images);
-        }
 
         $data['total'] = $total;
         $data['categories'] = $response;

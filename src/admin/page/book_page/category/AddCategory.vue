@@ -83,7 +83,6 @@ export default {
     },
   
     mounted() {
-        console.log(this.categories_data);
         if (this.categories_data) {
             this.categories = this.categories_data;
         }

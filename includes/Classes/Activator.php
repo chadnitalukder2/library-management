@@ -55,13 +55,13 @@ class Activator
         $table_name = $wpdb->prefix . 'lmt_books';
         $sql = "CREATE TABLE $table_name (
         id int(11) NOT NULL AUTO_INCREMENT,
-        book_name varchar(255) DEFAULT NULL,
+        book_name varchar(255)  NOT NULL,
         images varchar(255) DEFAULT NULL,
         category_name varchar(255) NOT NULL,
-        author varchar(255)  DEFAULT NULL,
-        publisher varchar(255)  DEFAULT NULL,
+        author varchar(255)  NOT NULL,
+        publisher varchar(255)   NULL,
         published_date varchar(255) NULL,
-        quantity int(11)   NOT NULL,
+        quantity int(11)    NULL,
         edition varchar(255) NULL,
         description varchar(255) NULL,
         added_date varchar(255) NULL,
@@ -79,11 +79,11 @@ class Activator
         $table_name = $wpdb->prefix . 'lmt_members';
         $sql = "CREATE TABLE $table_name (
         id int(11) NOT NULL AUTO_INCREMENT,
-        name varchar(255) DEFAULT NULL,
-        email varchar(255)  DEFAULT NULL,
+        name varchar(255) NOT NULL,
+        email varchar(255)  NOT NULL,
         phone int(11) NOT NULL,
         address varchar(255) NULL,
-        membership_date varchar(255) NULL,
+        membership_date varchar(255)  NULL,
         membership_type varchar(255) NULL,
         created_at timestamp NULL,
         updated_at timestamp NULL,
