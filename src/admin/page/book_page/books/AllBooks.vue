@@ -38,7 +38,11 @@
                 <el-table-column prop="author" label="Author" width="auto" />
                 <el-table-column prop="edition" label="Edition" width="auto" />
                 <el-table-column prop="quantity" label="Quantity" width="auto" />
-                <el-table-column prop="formattedDate" label="Add Date" width="auto" />
+                <el-table-column prop="added_date" label="Add Date" width="auto" >
+                    <template #default="{ row }">
+                        {{ formatAddedDate(row.added_date) }}
+                    </template>
+                </el-table-column>
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view books" placement="top-start">
@@ -130,16 +134,10 @@ export default {
     },
 
     methods: {
-
-        formatDate(dateString) {
-            const date = new Date(dateString);
-
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // JavaScript months are 0-based, so add 1
-            const year = date.getFullYear();
-
-            // Format the date as "day-month-year"
-            return `${day}-${month}-${year}`;
+        formatAddedDate(date) {
+            if (!date) return '';  // Handle if the date is null or undefined
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(date).toLocaleDateString('en-GB', options);
         },
 
         getBooks() {
@@ -154,13 +152,7 @@ export default {
                     search: that.search,
                     lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
                 }).then((response) => {
-                    // that.books = response?.data?.data?.books;
-                    that.books = response?.data?.data?.books.map(books => {
-                        return {
-                            ...books,
-                            formattedDate: that.formatDate(books.added_date) // Format each coupon's end date
-                        };
-                    });
+                    that.books = response?.data?.data?.books;
                     that.total_book = response?.data?.data?.total;
                 }).fail((error) => {
                     console.log(error);

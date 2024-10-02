@@ -28,9 +28,9 @@ class BooksController{
         if(!empty($validation)){
             wp_send_json_error($validation);
         }
-
+       
         $response = (new Books())->saveBooks($sanitize_data);
-   
+     
         if ($response) {
             wp_send_json_success('Books updated successfully');
         } else {

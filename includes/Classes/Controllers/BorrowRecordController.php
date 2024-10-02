@@ -9,6 +9,7 @@ class BorrowRecordController{
         lmtValidateNonce('lmt_admin_nonce');
         $route = sanitize_text_field($_REQUEST['route']);
         $routeMaps = array(
+            'post_borrow_record' => 'postBorrowRecord',
             'get_BorrowRecord' => 'getBorrowRecord',
             'delete_borrow_record' => 'deleteBorrowRecord'
         );
@@ -18,6 +19,24 @@ class BorrowRecordController{
         }
     }
 
+    public function postBorrowRecord(){
+        $form_data = Arr::get($_REQUEST, 'data');
+        
+        $sanitize_data = BorrowRecordServices::sanitize($form_data);
+        $validation = BorrowRecordServices::validate($sanitize_data);
+
+        if(!empty($validation)){
+            wp_send_json_error($validation);
+        }
+
+        $response = (new BorrowRecord())->saveBorrowRecord($sanitize_data);
+     
+        if ($response) {
+            wp_send_json_success('Borrow Record updated successfully');
+        } else {
+            wp_send_json_error('Failed to updated borrow record');
+        }
+    }
 
     public function getBorrowRecord(){
         $response = (new BorrowRecord())->getBorrowRecord();

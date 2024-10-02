@@ -5,15 +5,13 @@ use libraryManagement\Classes\Services\ArrayHelper as Arr;
 class Books extends Model {
     protected $model = 'lmt_books';
 
-    public function saveBooks($data){
-      
+    public function saveBooks($data){ 
+        
         $id = Arr::get($data,'id', null);
-      
         if($id){
-            LMTDBModel('lmt_books')->where('id', $id)->update($data);
-           
+            return LMTDBModel('lmt_books')->where('id', $id)->update($data);
         }else{
-             LMTDBModel('lmt_books')->insert($data);
+           return LMTDBModel('lmt_books')->insert($data);
         }
      
     }

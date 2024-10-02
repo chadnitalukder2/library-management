@@ -6,6 +6,15 @@ use libraryManagement\Classes\Services\ArrayHelper as Arr;
 class BorrowRecord extends Model {
     protected $model = 'lmt_borrow_records';
 
+    public function saveBorrowRecord($data){
+     
+        $id = Arr::get($data,'id', null);
+        if($id){
+            return LMTDBModel('lmt_borrow_records')->where('id', $id)->update($data);
+        }else{
+           return LMTDBModel('lmt_borrow_records')->insert($data);
+        }
+    }
 
     public function getBorrowRecord(){
         $per_page = sanitize_text_field(Arr::get($_REQUEST, 'per_page', 0)) ;

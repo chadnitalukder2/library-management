@@ -4,8 +4,12 @@ use WPTravelManager\Classes\ArrayHelper as Arr;
 
 class BorrowRecordServices{
     public static function sanitize($data){
-        $data['name'] = sanitize_text_field( Arr::get($data, 'name') );
-        $data['description'] = sanitize_text_field( Arr::get($data, 'description') );
+        $data['book_id'] = sanitize_text_field( Arr::get($data, 'book_id', 1) );
+        $data['member_id'] = sanitize_text_field( Arr::get($data, 'member_id', 1) );
+        $data['borrow_date'] = sanitize_text_field( Arr::get($data, 'borrow_date') );
+        $data['due_date'] = sanitize_text_field( Arr::get($data, 'due_date') );
+        $data['return_date'] = sanitize_text_field( Arr::get($data, 'return_date') );
+        $data['status'] = sanitize_text_field( Arr::get($data, 'status') );
 
         $id = Arr::get($data, 'id', null);
         if($id !== null) {
@@ -17,11 +21,6 @@ class BorrowRecordServices{
     }
 
     public static function validate($data){
-        $errors = [];
-
-        if(empty($data['name'])){
-            $errors['name'] = "Category Name is required";
-        }
-        return $errors;
+       
     }
 }
