@@ -1,20 +1,19 @@
 <template>
     <div class="lmt_wrapper">
 
-        <AppModal :title="'Add New Staff'" :width="1000" :showFooter="false" ref="add_category_modal">
+        <AppModal :title="'Add New Staff'" :width="1000" :showFooter="false" ref="add_staff_modal">
             <template #body>
               <AddStaff @updateDataAfterNewAdd="updateDataAfterNewAdd"/>
             </template>
         </AppModal>
 
-        <AppTable :tableData="categories"  v-loading="loading">
+        <AppTable :tableData="staffs"  v-loading="loading">
 
             <template #header>
-                <h1 class="table-title">All Categories</h1>
-                <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="llmt_button">
-                    Add New Category
+                <h1 class="table-title">All Staff</h1>
+                <el-button @click="openStaffAddModal()" size="large" type="primary" icon="Plus" class="llmt_button">
+                    Add New Staff
                 </el-button>
-
             </template>
 
             <template #filter>
@@ -28,17 +27,17 @@
                 <el-table-column prop="email" label="Email" width="auto" />
                 <el-table-column prop="phone" label="Phone" width="auto" />
                 <el-table-column prop="address" label="address" width="auto" />
-                <el-table-column prop="joined_date" label="Joined Date" width="auto" />
+                <el-table-column prop="formattedDate" label="Joined Date" width="auto" />
                 <el-table-column prop="role" label="Role" width="auto" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
-                        <el-tooltip class="box-item" effect="dark" content="Click to view category" placement="top-start">
-                            <el-button @click="openUpdateCategoryModal(row)" class="lmt_box_icon"  link  size="small">
+                        <el-tooltip class="box-item" effect="dark" content="Click to view staff" placement="top-start">
+                            <el-button @click="openUpdateStaffModal(row)" class="lmt_box_icon"  link  size="small">
                                 <Icon icon="lmt-edit" />
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip class="box-item" effect="dark" content="Click to delete category" placement="top-start">
-                            <el-button @click="openDeleteCategoryModal(row)" class="lmt_box_icon"  link  size="small">
+                        <el-tooltip class="box-item" effect="dark" content="Click to delete staff" placement="top-start">
+                            <el-button @click="openDeleteStaffModal(row)" class="lmt_box_icon"  link  size="small">
                                 <Icon icon="lmt-delete" />
                             </el-button>
                         </el-tooltip>
@@ -52,10 +51,10 @@
                     v-model:page-size="pageSize"
                     :page-sizes="[10, 20, 30, 40]"
                     large
-                    :disabled="total_category <= pageSize"
+                    :disabled="total_staff <= pageSize"
                     background
                     layout="total, sizes, prev, pager, next"
-                    :total="+total_category"
+                    :total="+total_staff"
                   
                 />
             </template>
@@ -63,30 +62,30 @@
         </AppTable>
 
         <AppModal
-            :title="'Update Category'"
+            :title="'Update Staffs'"
             :width="800"
             :showFooter="false"
-            ref="update_category_modal">
+            ref="update_staff_modal">
             <template #body>
-                <AddStaff :categories_data="category" />
+                <AddStaff :staffs_data="staff" />
             </template>
         </AppModal>
 
         <AppModal
-            :title="'Delete Category'"
+            :title="'Delete Staffs'"
             :width="400"
             :showFooter="false"
-            ref="delete_category_modal">
+            ref="delete_staffs_modal">
             <template #body>
                 <div class="delete-modal-body">
                     <h1>Are you sure ?</h1>
-                    <p>You want to delete this category</p>
+                    <p>You want to delete this staff</p>
                 </div>
             </template>
             <template #footer>
                 <div class="lmt-modal-footer">
-                    <el-button @click="$refs.delete_category_modal.handleClose()" type="default" size="medium">Cancel</el-button>
-                    <el-button @click="deleteCategory" type="primary" size="medium">Delete</el-button>
+                    <el-button @click="$refs.delete_staffs_modal.handleClose()" type="default" size="medium">Cancel</el-button>
+                    <el-button @click="deleteStaffs" type="primary" size="medium">Delete</el-button>
                 </div>
             </template>
         </AppModal>
@@ -110,11 +109,11 @@ export default {
     data() {
         return {
             search: '',
-            categories: [],
-            category: {},
-            total_category: 0,
+            staffs: [],
+            staff: {},
+            total_staff: 0,
             loading: false,
-            add_category_modal: false,
+            add_staff_modal: false,
             currentPage: 1,
             pageSize: 10,
             active_id: null
@@ -122,39 +121,56 @@ export default {
     },
 
     methods: {
-        getCategories(){
+
+        formatDate(dateString) {
+            const date = new Date(dateString);
+
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // JavaScript months are 0-based, so add 1
+            const year = date.getFullYear();
+
+            // Format the date as "day-month-year"
+            return `${day}-${month}-${year}`;
+        },
+
+        getStaffs(){
             this.loading = true;
             let that = this;
 
             jQuery
             .post(ajaxurl, {
-                action: "lmt_category",
-                route: "get_categories",
+                action: "lmt_staffs",
+                route: "get_staffs",
                 per_page: this.pageSize,
                 page: this.currentPage,
                 search: this.search,
                 lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
             }).then((response) => {
-                console.log(response, 'response');
-                    that.categories = response?.data?.data?.categories;
-                    that.total_category = response?.data?.data?.total;
+                    // that.staffs = response?.data?.data?.staffs;
+                    that.staffs = response?.data?.data?.staffs.map(staffs => {
+                        return {
+                            ...staffs,
+                            formattedDate: that.formatDate(staffs.joined_date) // Format each coupon's end date
+                        };
+                    });
+                    that.total_staff = response?.data?.data?.total;
                 }).fail((error) => {
                     console.log(error);
                 }).always(() => {
                     that.loading = false;
                 })
         },
-        deleteCategory(){
+        deleteStaffs(){
             let that = this;
 
             jQuery.post(ajaxurl, {
-                action: "lmt_category",
-                route: "delete_categories",
+                action: "lmt_staffs",
+                route: "delete_staffs",
                 id: that.active_id,
                 lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
             }).then((response) => {
-                    that.getCategories();
-                    that.$refs.delete_category_modal.handleClose();
+                    that.getStaffs();
+                    that.$refs.delete_staffs_modal.handleClose();
                     this.$notify({
                     title: 'Success',
                     message: response.data,
@@ -165,24 +181,24 @@ export default {
                     console.log(error);
                 })
         },
-        openBooksAddModal() {
-            this.$refs.add_category_modal.openModel();
+        openStaffAddModal() {
+            this.$refs.add_staff_modal.openModel();
         },
-        openUpdateCategoryModal(row) {
-            this.category = row;
-            this.$refs.update_category_modal.openModel();
+        openUpdateStaffModal(row) {
+            this.staff = row;
+            this.$refs.update_staff_modal.openModel();
         },
-        updateDataAfterNewAdd(new_category) {
-            this.$refs.add_category_modal.handleClose();
-            this.categories.unshift(new_category);
+        updateDataAfterNewAdd(new_staff) {
+            this.$refs.add_staff_modal.handleClose();
+            this.staffs.unshift(new_staff);
         },
-        openDeleteCategoryModal(row) {
+        openDeleteStaffModal(row) {
             this.active_id = row.id;
-            this.$refs.delete_category_modal.openModel();
+            this.$refs.delete_staffs_modal.openModel();
         },
     },
     created() {
-        this.getCategories();
+        this.getStaffs();
     },
     
 }

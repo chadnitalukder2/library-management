@@ -11,7 +11,7 @@
 
             <template #header>
                 <h1 class="table-title">All Categories</h1>
-                <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="llmt_button">
+                <el-button @click="openCategoryAddModal()" size="large" type="primary" icon="Plus" class="llmt_button">
                     Add New Category
                 </el-button>
 
@@ -161,7 +161,7 @@ export default {
                     console.log(error);
                 })
         },
-        openBooksAddModal() {
+        openCategoryAddModal() {
             this.$refs.add_category_modal.openModel();
         },
         openUpdateCategoryModal(row) {
