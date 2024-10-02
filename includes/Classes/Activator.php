@@ -46,6 +46,7 @@ class Activator
         $this->migrateBorrowRecordsTable();
         $this->migrateCategoryTable();
         $this->migrateStaffTable();
+        $this->migrateFinesTable();
     }
 
     public function migrateBooksTable()
@@ -102,6 +103,7 @@ class Activator
         book_id int(11) NOT NULL,
         member_id int(11) NOT NULL,
         borrow_date varchar(255) NULL,
+        due_date varchar(255) NULL,
         return_date varchar(255) NULL,
         status varchar(255) NULL,
         created_at timestamp NULL,
@@ -134,8 +136,10 @@ class Activator
         $table_name = $wpdb->prefix . 'lmt_staff';
         $sql = "CREATE TABLE $table_name (
         id int(11) NOT NULL AUTO_INCREMENT,
-        name varchar(255) DEFAULT NULL,
-        email varchar(255)  DEFAULT NULL,
+        name varchar(255) NOT NULL,
+        email varchar(255)  NOT NULL,
+        phone int(11)  NOT NULL,
+        address varchar(255)  DEFAULT NULL,
         role  varchar(255)  DEFAULT NULL,
         joined_date varchar(255) NULL,
         created_at timestamp NULL,
@@ -145,6 +149,24 @@ class Activator
         $this->runSQL($sql, $table_name);
     }
 
+    public function migrateFinesTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'lmt_fines';
+        $sql = "CREATE TABLE $table_name (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        book_id int(11) NOT NULL,
+        member_id int(11) NOT NULL,
+        amount int(11) NULL,
+        status varchar(255) NULL,
+        issued_date varchar(255) NULL,
+        created_at timestamp NULL,
+        updated_at timestamp NULL,
+        PRIMARY KEY (id)
+        ) $charset_collate;";
+        $this->runSQL($sql, $table_name);
+    }
 
     private function runSQL($sql, $tableName)
     {

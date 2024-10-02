@@ -4,6 +4,7 @@ namespace libraryManagement\Classes\Routes;
 use libraryManagement\Classes\Controllers\CategoryController;
 use libraryManagement\Classes\Controllers\BooksController;
 use libraryManagement\Classes\Controllers\MembersController;
+use libraryManagement\Classes\Controllers\BorrowRecordController;
 class AdminAjaxHandler
 {
     public function registerEndpoints()
@@ -18,6 +19,9 @@ class AdminAjaxHandler
         });
         add_action('wp_ajax_lmt_members', function () {
             (new MembersController())->registerAjaxRoutes();
+        });
+        add_action('wp_ajax_lmt_borrow_record', function () {
+            (new BorrowRecordController())->registerAjaxRoutes();
         });
        
     }

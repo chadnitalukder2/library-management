@@ -4,6 +4,8 @@ import Books from '../admin/page/book_page/Books.vue';
 import AllBooks from '../admin/page/book_page/books/AllBooks.vue';
 import AllCategory from '../admin/page/book_page/category/AllCategory.vue';
 import AllMembers from '../admin/page/member_page/AllMembers.vue';
+import AllStaff from '../admin/page/staff_page/AllStaff.vue';
+import BorrowRecords from '../admin/page/borrow_records_page/borrowRecords.vue';
 
 export const routes = [
     {
@@ -33,6 +35,16 @@ export const routes = [
         path: '/members',
         name: 'members',
         component: AllMembers
+    },
+    {
+        path: '/borrow_records',
+        name: 'borrow_records',
+        component: BorrowRecords
+    },
+    {
+        path: '/staff',
+        name: 'staff',
+        component: AllStaff
     },
     {
         path: '/settings',
