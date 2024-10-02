@@ -3,7 +3,7 @@
 namespace libraryManagement\Classes\Routes;
 use libraryManagement\Classes\Controllers\CategoryController;
 use libraryManagement\Classes\Controllers\BooksController;
-
+use libraryManagement\Classes\Controllers\MembersController;
 class AdminAjaxHandler
 {
     public function registerEndpoints()
@@ -15,6 +15,9 @@ class AdminAjaxHandler
         });
         add_action('wp_ajax_lmt_books', function () {
             (new BooksController())->registerAjaxRoutes();
+        });
+        add_action('wp_ajax_lmt_members', function () {
+            (new MembersController())->registerAjaxRoutes();
         });
        
     }

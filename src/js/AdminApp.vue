@@ -8,6 +8,9 @@
                      <router-link class="lmt-menu-item" to="/books" >
                         Books
                     </router-link>
+                    <router-link class="lmt-menu-item" to="/members" >
+                        Members
+                    </router-link>
                     <router-link class="lmt-menu-item" to="/settings" >
                         Settings
                     </router-link>

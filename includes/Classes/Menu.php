@@ -39,6 +39,21 @@ class Menu
             $menuPermission,
             'admin.php?page=library-management.php#/books',
         );
+        $submenu['library-management.php']['borrow_records'] = array(
+            __('Borrow Records', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=library-management.php#/borrow_records',
+        );
+        $submenu['library-management.php']['members'] = array(
+            __('Members', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=library-management.php#/members',
+        );
+        $submenu['library-management.php']['staff'] = array(
+            __('Staff', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=library-management.php#/staff',
+        );
         
         $submenu['library-management.php']['settings'] = array(
             __('Settings', 'textdomain'),
