@@ -20,12 +20,9 @@
 </template>
 
 <script>
-import ImageUpload from '../../../Components/AppImageUpload.vue';
 
 export default {
-    components:{
-        ImageUpload
-    },
+
    
     data() {
         return {

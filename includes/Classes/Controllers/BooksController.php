@@ -10,7 +10,8 @@ class BooksController{
         $route = sanitize_text_field($_REQUEST['route']);
         $routeMaps = array(
             'post_books' => 'postBooks',
-            'get_books' => 'getBooks'
+            'get_books' => 'getBooks',
+            'delete_books' => 'deleteBooks'
         );
         if (isset($routeMaps[$route])) {
             $this->{$routeMaps[$route]}();
@@ -29,11 +30,11 @@ class BooksController{
         }
 
         $response = (new Books())->saveBooks($sanitize_data);
-     
+   
         if ($response) {
-            wp_send_json_success('Category updated successfully');
+            wp_send_json_success('Books updated successfully');
         } else {
-            wp_send_json_error('Failed to updated Category');
+            wp_send_json_error('Failed to updated books');
         }
     }
 
@@ -48,20 +49,20 @@ class BooksController{
         );
     }
 
-    // public  function deleteCategories(){
-    //     $category_id = Arr::get($_REQUEST,'id');
+    public  function deleteBooks(){
+        $books_id = Arr::get($_REQUEST,'id');
 
-    //     if(!$category_id){
-    //         wp_send_json_error('Category id is required');
-    //     }
-    //     $response = Category::deleteCategories($category_id);
+        if(!$books_id){
+            wp_send_json_error('Books id is required');
+        }
+        $response = Books::deleteBooks($books_id);
        
-    //     if ($response) {
-    //         wp_send_json_success('Activities deleted successfully');
-    //     } else {
-    //         wp_send_json_error('Failed to delete activities');
-    //     }
-    // }
+        if ($response) {
+            wp_send_json_success('Books deleted successfully');
+        } else {
+            wp_send_json_error('Failed to delete books');
+        }
+    }
 }
 
 ?>

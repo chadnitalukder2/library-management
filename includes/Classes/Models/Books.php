@@ -9,11 +9,14 @@ class Books extends Model {
     public function saveBooks($data){
       
         $id = Arr::get($data,'id', null);
+      
         if($id){
-            return LMTDBModel('lmt_books')->where('id', $id)->update($data);
+            LMTDBModel('lmt_books')->where('id', $id)->update($data);
+           
         }else{
-           return LMTDBModel('lmt_books')->insert($data);
+             LMTDBModel('lmt_books')->insert($data);
         }
+     
     }
 
     public function getBooks(){
@@ -39,7 +42,7 @@ class Books extends Model {
 
     }
 
-    // public static function deleteCategories($id){
-    //     return LMTDBModel('lmt_category')->where('id', $id)->delete();
-    // }
+    public static function deleteBooks($id){
+        return LMTDBModel('lmt_books')->where('id', $id)->delete();
+    }
 }

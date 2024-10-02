@@ -58,9 +58,9 @@ class CategoryController{
         $response = Category::deleteCategories($category_id);
        
         if ($response) {
-            wp_send_json_success('Activities deleted successfully');
+            wp_send_json_success('Category deleted successfully');
         } else {
-            wp_send_json_error('Failed to delete activities');
+            wp_send_json_error('Failed to delete Category');
         }
     }
 }

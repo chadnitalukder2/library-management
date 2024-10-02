@@ -151,6 +151,12 @@ export default {
             }).then((response) => {
                     that.getCategories();
                     that.$refs.delete_category_modal.handleClose();
+                    this.$notify({
+                    title: 'Success',
+                    message: response.data,
+                    type: 'success',
+                    position: 'bottom-right',
+                })
                 }).fail((error) => {
                     console.log(error);
                 })

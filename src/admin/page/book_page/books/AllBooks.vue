@@ -3,12 +3,11 @@
 
         <AppModal :title="'Add New Book'" :width="1000" :showFooter="false" ref="add_books_modal">
             <template #body>
-                <AddBooks />
+                <AddBooks @updateDataAfterNewAdd="updateDataAfterNewAdd"/>
             </template>
         </AppModal>
 
         <AppTable :tableData="books"  v-loading="loading">
-
             <template #header>
                 <h1 class="table-title">All Books</h1>
                 <el-button @click="openBooksAddModal()" size="large" type="primary" icon="Plus" class="ltm_button">
@@ -39,16 +38,16 @@
                 <el-table-column prop="author" label="Author" width="auto" />
                 <el-table-column prop="edition" label="Edition" width="auto" />
                 <el-table-column prop="quantity" label="Quantity" width="auto" />
-                <el-table-column prop="formattedDate" label="Added Date" width="auto" />
+                <el-table-column prop="formattedDate" label="Add Date" width="auto" />
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
-                        <el-tooltip class="box-item" effect="dark" content="Click to view activities" placement="top-start">
-                            <el-button  class="lmt_box_icon"  link  size="small">
+                        <el-tooltip class="box-item" effect="dark" content="Click to view books" placement="top-start">
+                            <el-button @click="openUpdateBooksModal(row)" class="lmt_box_icon"  link  size="small">
                                 <Icon icon="lmt-edit" />
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip class="box-item" effect="dark" content="Click to delete activities" placement="top-start">
-                            <el-button  class="lmt_box_icon" link  size="small">
+                        <el-tooltip class="box-item" effect="dark" content="Click to delete books" placement="top-start">
+                            <el-button @click="openDeleteBooksModal(row)"  class="lmt_box_icon" link  size="small">
                                 <Icon icon="lmt-delete" />
                             </el-button>
                         </el-tooltip>
@@ -72,7 +71,34 @@
 
         </AppTable>
 
-    
+        <AppModal
+            :title="'Update Books'"
+            :width="800"
+            :showFooter="false"
+            ref="update_books_modal">
+            <template #body>
+                <AddBooks :books_data="book" />
+            </template>
+        </AppModal>
+
+        <AppModal
+            :title="'Delete Books'"
+            :width="400"
+            :showFooter="false"
+            ref="delete_books_modal">
+            <template #body>
+                <div class="delete-modal-body">
+                    <h1>Are you sure ?</h1>
+                    <p>You want to delete this Books</p>
+                </div>
+            </template>
+            <template #footer>
+                <div class="lmt-modal-footer">
+                    <el-button @click="$refs.delete_books_modal.handleClose()" type="default" size="medium">Cancel</el-button>
+                    <el-button @click="deleteBooks" type="primary" size="medium">Delete</el-button>
+                </div>
+            </template>
+        </AppModal>
 
     </div>
 </template>
@@ -87,7 +113,7 @@ export default {
         AppTable,
         AppModal,
         Icon,
-        AddBooks
+        AddBooks,
     },
     data() {
         return {
@@ -99,6 +125,7 @@ export default {
             add_books_modal: false,
             currentPage: 1,
             pageSize: 10,
+            active_id : null
         }
     },
 
@@ -141,6 +168,27 @@ export default {
                     that.loading = false;
                 })
         },
+        deleteBooks(){
+            let that = this;
+
+            jQuery.post(ajaxurl, {
+                action: "lmt_books",
+                route: "delete_books",
+                id: that.active_id,
+                lmt_admin_nonce: window.libraryManagementAdmin.lmt_admin_nonce,
+            }).then((response) => {
+                    that.getBooks();
+                    that.$refs.delete_books_modal.handleClose();
+                    this.$notify({
+                    title: 'Success',
+                    message: response.data,
+                    type: 'success',
+                    position: 'bottom-right',
+                })
+                }).fail((error) => {
+                    console.log(error);
+                }) 
+        },
 
         openBooksAddModal() {
             this.$refs.add_books_modal.openModel();
@@ -148,6 +196,14 @@ export default {
         updateDataAfterNewAdd(new_books) {
             this.$refs.add_books_modal.handleClose();
             this.books.unshift(new_books);
+        },
+        openUpdateBooksModal(row) {
+            this.book = row;
+            this.$refs.update_books_modal.openModel();
+        },
+        openDeleteBooksModal(row) {
+            this.active_id = row.id;
+            this.$refs.delete_books_modal.openModel();
         },
     },
     created() {
