@@ -19,7 +19,11 @@
                 <el-table-column prop="phone" label="Phone" width="auto" />
                 <el-table-column prop="address" label="Address" width="auto" />
                 <el-table-column prop="membership_date" label="Date" width="auto" />
-                <el-table-column prop="membership_type" label="Type" width="auto" />
+                <el-table-column prop="membership_type" label="Type" width="auto" >
+                    <template #default="{ row }">
+                        {{ formatAddedDate(row.membership_type) }}
+                    </template>
+                </el-table-column>
                 <el-table-column label="Operations" width="120">
                     <template #default="{ row }">
                         <el-tooltip class="box-item" effect="dark" content="Click to view member" placement="top-start">
@@ -100,6 +104,12 @@ export default {
     },
 
     methods: {
+        formatAddedDate(date) {
+            if (!date) return '';  // Handle if the date is null or undefined
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(date).toLocaleDateString('en-GB', options);
+        },
+
         getMembers(){
             this.loading = true;
             let that = this;

@@ -1,7 +1,8 @@
 <?php
 namespace libraryManagement\Classes;
 use libraryManagement\Classes\Routes\AdminAjaxHandler;
-
+use libraryManagement\Classes\Routes\ShortcodeRegister;
+use libraryManagement\Classes\Modules\CustomPageRegister;
 class Bootstrap {
     public function Boot () {
         $this->loadClasses();
@@ -12,6 +13,9 @@ class Bootstrap {
 
         // Top Level Ajax Handlers
          (new AdminAjaxHandler())->registerEndpoints();
+
+          // Top Level Ajax Handlers
+          (new ShortcodeRegister())->register();
 
          add_action('library-management/render_admin_app', function () {
             (new AdminApp())->bootView();
@@ -39,11 +43,10 @@ class Bootstrap {
         // $activator = new \libraryManagement\Classes\Activator();
         // $activator->migrateDatabases(false);
 
-
-
-       
-
+        add_action('after_setup_theme', function () {
+            (new CustomPageRegister())->registerPage();
+        });
     }
-  
+    
 
 }
