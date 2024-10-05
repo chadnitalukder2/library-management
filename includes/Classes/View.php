@@ -1,4 +1,5 @@
-<?php namespace libraryManagement\Classes;
+<?php 
+namespace libraryManagement\Classes;
 
 class View
 {

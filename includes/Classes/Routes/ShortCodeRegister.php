@@ -1,19 +1,31 @@
 <?php
-// Step 1: Create a class to handle shortcodes
 namespace libraryManagement\Classes\Routes;
+use libraryManagement\Classes\View;
 
 class ShortcodeRegister {
 
-    // Step 2: Register your shortcode function
     public function register() {
+        add_action('wp_enqueue_scripts', function () {
+            wp_enqueue_style('library_management_public_css', LIBRARYMANAGEMENT_URL.'assets/css/lmt_public.css', [], LIBRARYMANAGEMENT_VERSION);
+            wp_enqueue_script( 'library_management_public_js', LIBRARYMANAGEMENT_URL.'assets/js/lmt_public.js',array('jquery'),LIBRARYMANAGEMENT_VERSION, false );
+
+            wp_localize_script('library_management_public_js', 'lmt_public', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'lmt_public_nonce' => wp_create_nonce('lmt_admin_nonce'),
+            ]);
+        });
+
         add_shortcode('lmt_book_search', array($this, 'bookSearchShortCode'));
     }
 
-    // Step 3: Define what the shortcode does
+  
     public function bookSearchShortCode($atts) {
-        ob_start(); // Capture the output
-        echo "<h1>Welcome to the Book Search</h1>"; // This is where your dynamic content goes
-        return ob_get_clean(); // Return the output
+        ob_start();
+        echo "<h1>Welcome to the Book Search</h1>
+        <p>hello booksu</p>"; 
+        View::render('Books/BooksIndex',[
+        ]);
+        return ob_get_clean();
     }
 }
 
