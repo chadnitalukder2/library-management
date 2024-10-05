@@ -26,10 +26,11 @@ if (!defined('LIBRARYMANAGEMENT_VERSION')) {
     {
         public function boot()
         {
-            if (is_admin()) {
+            // if (is_admin()) {
                 $this->adminHooks();
 
-            }
+            // }
+    
         }
        
         public function adminHooks()
