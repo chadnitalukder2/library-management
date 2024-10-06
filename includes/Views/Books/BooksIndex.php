@@ -58,7 +58,7 @@ namespace libraryManagement\Views\Books;
                     </div>
                     <div class="lmt_dropdown">
                       <div class="lmt_input_box">
-                        <input type="text" placeholder="books search by name">
+                        <input type="text" placeholder="books search by name...">
                         <button><span class="dashicons dashicons-search"></span></button>
                       </div>
                     </div>
@@ -66,7 +66,7 @@ namespace libraryManagement\Views\Books;
                 </div>
                 <!-- ================================== -->
                 <div class="lmt_category_trips_wrapper">
-                 <?php echo (new BookCard)->render( ) ?>
+                 <?php echo (new BookCard)->render( $all_books) ?>
                 </div>
                 <!-- =================================== -->
                 <div class="lmt_pagination">

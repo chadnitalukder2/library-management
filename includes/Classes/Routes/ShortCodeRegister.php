@@ -1,5 +1,7 @@
 <?php
 namespace libraryManagement\Classes\Routes;
+
+use libraryManagement\Classes\Models\Books;
 use libraryManagement\Classes\View;
 
 class ShortcodeRegister {
@@ -21,8 +23,16 @@ class ShortcodeRegister {
   
     public function bookSearchShortCode($atts) {
         ob_start();
+        $books = (new Books())->getBooks();
+        if ( is_array($books) && isset($books['books']) ) {
+            $all_books = $books['books'];
+        } else {
+            return;
+        }
        
         View::render('Books/BooksIndex',[
+            'all_books' => $all_books,
+            'total' => $books['total'],
         ]);
         return ob_get_clean();
     }
