@@ -21,8 +21,7 @@ class ShortcodeRegister {
   
     public function bookSearchShortCode($atts) {
         ob_start();
-        echo "<h1>Welcome to the Book Search</h1>
-        <p>hello booksu</p>"; 
+       
         View::render('Books/BooksIndex',[
         ]);
         return ob_get_clean();
