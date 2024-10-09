@@ -14,27 +14,34 @@
     .lmt_borrow_books_container{
         display: flex;
         gap: 30px;
+        flex-wrap: wrap;
+        align-items: flex-start;
         .lmt_borrow_record{
-            flex-basis: 45%;
+            width: calc(45% - 30px);
+            position: sticky;
             background-color: $lmt_background_color;
             padding: 30px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
             border-radius: 8px;
             .lmt_borrow_form{
                 .lmt_form_group{
+                    margin: 20px 0px;
                     p{
                         margin: 0;
                         color: $lmt-dark-500;
                         font-family: Inter;
-                        font-size: 16px;
+                        font-size: 18px;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 24px;
                         margin-bottom: 10px;
                     }
-                    input{
+                    .lmt_input{
                         width: 100%;
                         border-radius: 8px;
+                        padding: 16px;
+                        font-size: 16px;
+                        color: $lmt-dark-400;
                         border: 1px solid $lmt-neutral-400;
                         &:focus-visible{
                             border: 1px solid $lmt-primary-500;
@@ -42,12 +49,70 @@
                             outline: none;
                         }
                     }
+                    .lmt_borrow_btn{
+                        cursor: pointer;
+                        padding: 12px;
+                        font-size: 16px;
+                        background: $lmt-primary-500;
+                        color: $lmt_background_color;
+                        border: 1px solid $lmt-primary-500;
+                        border-radius: 8px;
+                        &:hover{
+                            background-color: $lmt-primary-400;
+                            border: 1px solid $lmt-primary-400;
+                        }
+                    }
                 }
             }
         }
         .lmt_book_details{
-            flex-basis: 54%;
-            background-color: antiquewhite;
+            flex-basis: 55%;
+            background-color: $lmt_background_color;
+            padding: 30px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+            border-radius: 8px;
+            .lmt_book_name{
+                h1{
+                    margin: 0px;
+                    font-size: 26px;
+                    line-height: 1.21em;
+                    font-weight: 700;
+                    color: $lmt-dark-600;
+                    padding-bottom: 30px;
+                }
+            }
+            .lmt_book_image{
+                width: 100%;
+                height: 380px;
+                border-radius: 8px;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .lmt_borrow_book_details{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding-top: 30px;
+                .lmt_book{
+                    padding-bottom: 30px;
+                    font-size: 18px;
+                    .lmt_icon_box{
+                        background: $lmt-primary-500;
+                        padding: 10px;
+                        border-radius: 50%;
+                        display: inline-block;
+                    
+                        .icon{
+                            color: white;
+                           
+                        }
+                    }
+
+                }
+            }
         }
     }
     //===========================
