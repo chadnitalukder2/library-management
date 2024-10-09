@@ -42,4 +42,12 @@ class Books extends Model {
     public static function deleteBooks($id){
         return LMTDBModel('lmt_books')->where('id', $id)->delete();
     }
+
+     public function getBooksById($id){
+        if(!$id){
+            return;
+        }
+
+        $query = $this->table('lmt_books')->select('*')->where('id', $id)->get();
+     }
 }

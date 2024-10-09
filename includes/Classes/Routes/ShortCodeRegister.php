@@ -3,6 +3,7 @@ namespace libraryManagement\Classes\Routes;
 
 use libraryManagement\Classes\Models\Books;
 use libraryManagement\Classes\View;
+use libraryManagement\Classes\Services\ArrayHelper as Arr;
 
 class ShortcodeRegister {
 
@@ -18,6 +19,30 @@ class ShortcodeRegister {
         });
 
         add_shortcode('lmt_book_search', array($this, 'bookSearchShortCode'));
+        add_shortcode('lmt_book', array($this, 'bookDetailsShortCode'));
+    }
+
+    public function bookDetailsShortCode( $atts )
+    {
+        wp_enqueue_style('library_management_borrow_books_css', LIBRARYMANAGEMENT_URL.'assets/css/borrow_books.css', [], LIBRARYMANAGEMENT_VERSION);
+        // Get the trip ID from the shortcode attribute or URL parameter
+        $id = Arr::get($atts, 'id', isset($_GET['id']) ? intval($_GET['id']) : '');
+        if( empty( $id ) ){
+            return;
+        }
+        return $this->preparedRenderData( $id );
+    }
+    public function preparedRenderData( $id )
+    {
+        
+  
+        ob_start(); 
+        $books = (new Books())->getBooksById($id);
+       
+        View::render('Books/BorrowBook',[
+         'id' => $id,
+        ]);
+        return ob_get_clean();
     }
 
   

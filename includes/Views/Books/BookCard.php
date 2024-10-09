@@ -12,17 +12,17 @@ class BookCard
               $empty_image = LIBRARYMANAGEMENT_URL . 'assets/images/no_image.jpg';
 
               foreach ($all_books as $book) :
-                $id = ($book->ID);
-    
+                $id = ($book->id);
+
                 $book_name = $book->book_name;
                 $category_name = ($book->category_name);
-                // $image = ($book->images);
                 $image = Arr::get($book, 'images.1.url', null);
                 $author = ($book->author);
                 $edition = ($book->edition);
                 $quantity = ($book->quantity);
                 $description =  ($book->description);
-                
+
+                $book_details_page = get_option('wp_library_management_book_details_page');
             ?>
        
             <div class="lmt_category_trips">
@@ -83,7 +83,7 @@ class BookCard
                     </div>
                     <div class="lmt_trip_aval_time">
                         
-                        <a href="#" class="lmt_view_btn">Book Details</a>
+                        <a href="<?php echo site_url($book_details_page); ?>?id=<?php echo $id ?>" class="lmt_view_btn">Borrow Books</a>
                     </div>
                 </div>
             </div>

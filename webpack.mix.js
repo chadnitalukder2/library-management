@@ -21,4 +21,5 @@ mix
     .copy('src/images', 'assets/images')
     .sass('src/scss/admin/app.scss', 'assets/css/element.css')
     .sass('src/scss/public/lmt_public.scss', 'assets/css/lmt_public.css')
+    .sass('src/scss/public/borrow_book/borrow_index.scss', 'assets/css/borrow_books.css')
      
