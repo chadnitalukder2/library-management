@@ -42,3 +42,14 @@ function lmtValidateNonce($key = 'lmt_admin_nonce')
 function lmtFormatPrice($price) {
     return '$ ' . $price;
 }
+
+function StringToDate($dateString){
+    $cleanedDateString = preg_replace('/\s*\(.*?\)/', '', $dateString);
+    
+    // Convert the cleaned string to a Unix timestamp
+    $timestamp = strtotime($cleanedDateString);
+    
+    // Format the date as '01-10-2024'
+    $formattedDate  = date('d-m-Y', $timestamp);
+    return $formattedDate ;
+}

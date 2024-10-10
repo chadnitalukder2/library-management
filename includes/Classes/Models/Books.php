@@ -47,7 +47,8 @@ class Books extends Model {
         if(!$id){
             return;
         }
-
         $query = $this->table('lmt_books')->select('*')->where('id', $id)->get();
+        
+        return $query;
      }
 }

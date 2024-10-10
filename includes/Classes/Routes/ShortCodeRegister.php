@@ -38,9 +38,13 @@ class ShortcodeRegister {
   
         ob_start(); 
         $books = (new Books())->getBooksById($id);
-       
+        foreach($books as $book){
+             $book = $book;
+        }
+      
         View::render('Books/BorrowBook',[
          'id' => $id,
+         'book' => $book,
         ]);
         return ob_get_clean();
     }
