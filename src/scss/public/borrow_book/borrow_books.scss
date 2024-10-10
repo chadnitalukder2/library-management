@@ -93,9 +93,10 @@
             }
             .lmt_borrow_book_details{
                 display: flex;
-                justify-content: space-between;
                 flex-wrap: wrap;
                 padding-top: 30px;
+                padding-bottom: 5px;
+                gap: 20px;
                 .lmt_book{
                     padding-bottom: 30px;
                     font-size: 18px;
@@ -107,10 +108,39 @@
                     
                         .icon{
                             color: white;
-                           
+                           font-size: 20px;
                         }
                     }
+                    .lmt_name{
+                        color: $lmt-dark-300;
+                        font-weight: normal;
+                    }
+                    span{
+                        color: $lmt-dark-400;
+                        font-weight: 500;
+                        font-size: 16px;
+                    }
 
+                }
+                .lmt_left{
+                    flex-basis: 50%;
+                }
+                .lmt_right{
+                    width: calc(50% - 20px);
+                }
+            }
+            .lmt_borrow_description{
+                border-top: 1px solid $lmt-dark-100;
+                h1{
+                    margin: 0px;
+                    font-size: 20px;
+                    color: $lmt-dark-500;
+                    margin-top: 15px;
+                }
+                p{
+                    font-size: 16px;
+                    color: $lmt-dark-300;
+                    line-height: 1.8;
                 }
             }
         }

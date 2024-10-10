@@ -42,7 +42,7 @@
                         <div class="lmt_icon_box">
                             <span class="icon dashicons dashicons-category"></span>
                         </div>
-                        <span class="lmt_name"> <span >Category : </span><?php echo esc_html($category_name) ?></span>
+                        <span class="lmt_name"> <span >Category : </span>hello world</span>
                     </div>
                     <div class="lmt_book">
                         <div class="lmt_icon_box">
@@ -52,13 +52,13 @@
                     </div>
                     <div class="lmt_book">
                         <div class="lmt_icon_box">
-                            <span class="icon dashicons dashicons-admin-users"></span>
+                            <span class="icon dashicons dashicons-businessman"></span>
                         </div>
                         <span class="lmt_name"> <span>Publisher : </span><?php echo esc_html($author) ?></span>
                     </div>
                     <div class="lmt_book">
                         <div class="lmt_icon_box">
-                            <span class="icon dashicons dashicons-admin-users"></span>
+                            <span class="icon dashicons  dashicons-calendar"></span>
                         </div>
                         <span class="lmt_name"> <span>Published Date : </span><?php echo esc_html($author) ?></span>
                     </div>
@@ -72,17 +72,21 @@
                     </div>
                     <div class="lmt_book">
                         <div class="lmt_icon_box">
-                            <span class="icon dashicons  dashicons-analytics"></span>
+                            <span class="icon dashicons dashicons-calendar-alt"></span>
                         </div>
-                        <span class="lmt_name"> <span>Quantity : </span><?php echo esc_html($quantity) ?></span>
+                        <span class="lmt_name"> <span> Added Date : </span><?php echo esc_html($quantity) ?></span>
                     </div>
                     <div class="lmt_book">
                         <div class="lmt_icon_box">
                             <span class="icon dashicons  dashicons-analytics"></span>
                         </div>
-                        <span class="lmt_name"> <span>Added Date : </span><?php echo esc_html($quantity) ?></span>
+                        <span class="lmt_name"> <span>Quantity : </span><?php echo esc_html($quantity) ?></span>
                     </div>
                 </div>
+            </div>
+            <div class="lmt_borrow_description">
+                <h1>Description</h1>
+                <p>For any issues that appear within WordPress core, please create a new ticket on trac. Use the “administration” component and the “UI” focus when creating the new ticket, and be sure to include “Dashicons” somewhere in the text of the ticket.</p>
             </div>
         </div>
     </div>
