@@ -1,5 +1,10 @@
 <template>
     <div class="lmt_form_wrapper">
+        <div class="input-wrapper">
+            <p class="form-label" for="name">Due Date *</p>
+            <el-date-picker class="lmt_input" v-model="borrow_record.due_date" type="date" style="width: 100%"
+            placeholder="Due Date " size="large" />
+        </div>
 
         <div class="input-wrapper">
             <p class="form-label" for="name">Borrow Status *</p>
