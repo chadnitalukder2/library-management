@@ -102,6 +102,7 @@ class Activator
         id int(11) NOT NULL AUTO_INCREMENT,
         book_id int(11) NOT NULL,
         member_id int(11) NOT NULL,
+        member_email TEXT NOT NULL,
         borrow_date varchar(255) NULL,
         due_date varchar(255) NULL,
         return_date varchar(255) NULL,

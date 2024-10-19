@@ -1,6 +1,6 @@
 <?php
 namespace libraryManagement\Classes\Services;
-use WPTravelManager\Classes\ArrayHelper as Arr;
+use libraryManagement\Classes\Services\ArrayHelper as Arr;
 
 class MembersServices{
     public static function sanitize($data){
