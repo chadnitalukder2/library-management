@@ -76,7 +76,7 @@ class Menu
 
         //enque css file
         wp_enqueue_style('library-management_admin_css', LIBRARYMANAGEMENT_URL . 'assets/css/element.css');
-        wp_enqueue_style('library-management_admin_css', LIBRARYMANAGEMENT_URL . 'assets/css/lmt_public.css');
+        //wp_enqueue_style('library-management_admin_css', LIBRARYMANAGEMENT_URL . 'assets/css/lmt_public.css');
 
         $libraryManagementAdminVars = apply_filters('library-management/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),

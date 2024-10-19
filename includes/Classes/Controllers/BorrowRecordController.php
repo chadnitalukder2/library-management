@@ -7,11 +7,13 @@ use libraryManagement\Classes\Models\BorrowRecord;
 class BorrowRecordController{
     public function registerAjaxRoutes() {
         lmtValidateNonce('lmt_admin_nonce');
+
         $route = sanitize_text_field($_REQUEST['route']);
         $routeMaps = array(
             'post_borrow_record' => 'postBorrowRecord',
             'get_BorrowRecord' => 'getBorrowRecord',
-            'delete_borrow_record' => 'deleteBorrowRecord'
+            'delete_borrow_record' => 'deleteBorrowRecord',
+
         );
         if (isset($routeMaps[$route])) {
             $this->{$routeMaps[$route]}();
@@ -21,7 +23,7 @@ class BorrowRecordController{
 
     public function postBorrowRecord(){
         $form_data = Arr::get($_REQUEST, 'data');
-        
+     
         $sanitize_data = BorrowRecordServices::sanitize($form_data);
         $validation = BorrowRecordServices::validate($sanitize_data);
 
@@ -63,6 +65,8 @@ class BorrowRecordController{
             wp_send_json_error('Failed to delete Borrow Record');
         }
     }
+
+   
 }
 
 ?>

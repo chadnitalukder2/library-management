@@ -4,7 +4,8 @@ use WPTravelManager\Classes\ArrayHelper as Arr;
 
 class BorrowRecordServices{
     public static function sanitize($data){
-        $data['book_id'] = sanitize_text_field( Arr::get($data, 'book_id', 1) );
+        dd($data);
+        $data['book_id'] = sanitize_text_field( Arr::get($data, 'book_id', '') );
         $data['member_id'] = sanitize_text_field( Arr::get($data, 'member_id', 1) );
         $data['borrow_date'] = sanitize_text_field( Arr::get($data, 'borrow_date') );
         $data['due_date'] = sanitize_text_field( Arr::get($data, 'due_date') );

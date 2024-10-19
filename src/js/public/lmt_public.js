@@ -1,11 +1,11 @@
 
-import { submissionInquiry } from './submission_inquiry.js';
+import { submissionBorrowBooks } from './submission_borrow_books.js';
 
 
 
 
 (function ($) {
     $(document).ready(function () {
-        submissionCheckout($)
+        submissionBorrowBooks($)
     });
 })(jQuery);

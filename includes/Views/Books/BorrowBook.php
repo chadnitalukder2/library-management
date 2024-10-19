@@ -27,15 +27,15 @@ use libraryManagement\Classes\Services\ArrayHelper as Arr;
             <form id="lmt_submission-borrow-form">
                 <div class="lmt_borrow_form">
                 <div class="lmt_form_group">
-                        <input type="hidden"  name="name" id="">
+                        <input type="hidden"  name="book_id"  value="<?php echo esc_html($id) ?>">
                     </div>
                     <div class="lmt_form_group">
                         <p for="name">Borrow Date</p>
-                        <input type="date" class="lmt_input" name="name" id="lmt_name" required="">
+                        <input type="date" class="lmt_input" name="borrow_date"  required="">
                     </div>
                     <div class="lmt_form_group">
                         <p for="name">Return Date</p>
-                        <input type="date" class="lmt_input" name="name" id="lmt_name" required="">
+                        <input type="date" class="lmt_input" name="return_date"  required="">
                     </div>
 
                     <div class="lmt_form_group">
