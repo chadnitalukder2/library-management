@@ -10,6 +10,16 @@ const submissionBorrowBooks = ($) => {
         formDataArray.forEach(item => {
             formDataObject[item.name] = item.value;
         });
+        
+        const validateFormData = validation(formDataObject);
+        if (validateFormData !== true) {
+            let errors = validateFormData;
+            $form.find('.tm_error').remove();
+            for (let key in errors) {
+                $form.find(`[name="${key}"]`).after(`<div class="tm_error">${errors[key]}</div>`);
+            }
+            return;
+        }
 
         $.post(window.lmt_public.ajax_url, {
             action: 'lmt_borrow_record',
@@ -37,6 +47,22 @@ const submissionBorrowBooks = ($) => {
         });
 
     })
+    return true;
+}
+const validation = (formData) => {
+    let errors = {};
+    if (formData.borrow_date === '') {
+        errors.borrow_date = 'Borrow date is required';
+    }
+    if (formData.return_date === '') {
+        errors.return_date = 'Return Date is required';
+    }
+
+
+    if (Object.keys(errors).length > 0) {
+        return errors;
+    }
+
     return true;
 }
 
