@@ -3,6 +3,8 @@ namespace libraryManagement\Classes\Controllers;
 use libraryManagement\Classes\Services\ArrayHelper as Arr;
 use libraryManagement\Classes\Services\BooksServices;
 use libraryManagement\Classes\Models\Books;
+use libraryManagement\Classes\View;
+use libraryManagement\Views\Books\BookCard;
 
 class BooksController{
     public function registerAjaxRoutes() {
@@ -11,7 +13,8 @@ class BooksController{
         $routeMaps = array(
             'post_books' => 'postBooks',
             'get_books' => 'getBooks',
-            'delete_books' => 'deleteBooks'
+            'delete_books' => 'deleteBooks',
+            'filter_books' => 'filterBooks'
         );
         if (isset($routeMaps[$route])) {
             $this->{$routeMaps[$route]}();
@@ -47,6 +50,30 @@ class BooksController{
                 'message' => 'Books fetched successfully'
             )
         );
+    }
+
+    public function filterBooks(){
+        $books = (new Books())->getBooks();
+    
+        if ( is_array($books) && isset($books['books']) ) {
+            $all_books = $books['books'];
+        } else {
+            return;
+        }
+        
+
+        (new BookCard)->render( $all_books);
+
+        $all_books_html = ob_get_clean();
+
+        wp_send_json_success(
+            array(
+                'data' => $all_books_html,
+                'total' => $books['total'],
+                'message' => 'Books fetched successfully'
+            )
+        );
+       
     }
 
     public  function deleteBooks(){

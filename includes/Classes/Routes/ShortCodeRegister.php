@@ -35,7 +35,6 @@ class ShortcodeRegister {
     public function preparedRenderData( $id )
     {
         
-  
         ob_start(); 
         $books = (new Books())->getBooksById($id);
         foreach($books as $book){

@@ -1,8 +1,6 @@
 <?php
 namespace libraryManagement\Views\Books;
 
-
-
 ?>
 <div class="lmt_container">
     <div class="lmt_content">
@@ -58,8 +56,8 @@ namespace libraryManagement\Views\Books;
                     </div>
                     <div class="lmt_dropdown">
                       <div class="lmt_input_box">
-                        <input type="text" placeholder="books search by name...">
-                        <button><span class="dashicons dashicons-search"></span></button>
+                        <input type="text" id="lmt_books_search" placeholder="books search by name...">
+                        <button class="lmt_search_btn"><span class="dashicons dashicons-search"></span></button>
                       </div>
                     </div>
                    
