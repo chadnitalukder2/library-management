@@ -27,6 +27,20 @@ class BorrowRecordServices{
     }
 
     public static function validate($data){
-       
+        $errors = [];
+
+        if(empty($data['borrow_date'])){
+            $errors['borrow_date'] = "Borrow date is required";
+        }
+        if(empty($data['return_date'])){
+            $errors['return_date'] = "Return date is required";
+        }
+        if(empty($data['member_id'])){
+            $errors['member_id'] = "Member id is required";
+        }
+        if(empty($data['member_email'])){
+            $errors['member_email'] = "Member email is required";
+        }
+        return $errors;
     }
 }

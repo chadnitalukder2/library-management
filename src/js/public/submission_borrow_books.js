@@ -58,7 +58,6 @@ const validation = (formData) => {
         errors.return_date = 'Return Date is required';
     }
 
-
     if (Object.keys(errors).length > 0) {
         return errors;
     }
