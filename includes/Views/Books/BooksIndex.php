@@ -68,12 +68,14 @@ namespace libraryManagement\Views\Books;
                 </div>
                 <!-- =================================== -->
                 <div class="lmt_pagination">
-                    <p data-lmt_page_no="prev" class="lmt_all_trips_pag lmt_pag_prev lmt_pag_disabled"><span class="dashicons dashicons-arrow-left-alt2"></span></p>
-                  
-                        <p class="lmt_all_trips_pag "></p
-                   
-                    <p data-lmt_page_no="next" class="lmt_all_trips_pag lmt_pag_next"><span class="dashicons dashicons-arrow-right-alt2"></span></p>
+                    <p data-lmt_page_no="prev" class="lmt_all_books_pag lmt_pag_prev lmt_pag_disabled"><span class="dashicons dashicons-arrow-left-alt2"></span></p>
+
+                    <?php for ($i = 1; $i <= $total_page; $i++) : ?>
+                        <p class="lmt_all_books_pag <?php echo  $i == 1 ? 'lmt_pag_active' : '' ?>" data-lmt_page_no="<?php echo $i; ?>"><?php echo $i ?></p>
+                    <?php endfor; ?>
+                    <p data-lmt_page_no="next" class="lmt_all_books_pag lmt_pag_next"><span class="dashicons dashicons-arrow-right-alt2"></span></p>
                 </div>
+
 
             </div>
             <!-- ======================================== -->

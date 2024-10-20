@@ -51,6 +51,8 @@ class ShortcodeRegister {
   
     public function bookSearchShortCode($atts) {
         ob_start();
+        wp_enqueue_script( 'library_management_public_js', LIBRARYMANAGEMENT_URL.'assets/js/all_books_index.js',array('jquery'),LIBRARYMANAGEMENT_VERSION, false );
+
         $books = (new Books())->getBooks();
         if ( is_array($books) && isset($books['books']) ) {
             $all_books = $books['books'];
@@ -61,6 +63,7 @@ class ShortcodeRegister {
         View::render('Books/BooksIndex',[
             'all_books' => $all_books,
             'total' => $books['total'],
+            'total_page' => ceil($books['total'] / 2),
         ]);
         return ob_get_clean();
     }
